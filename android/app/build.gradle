@@ -1,0 +1,61 @@
+// Use the modern plugins block, relying on settings.gradle to define the plugin source.
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+    id "dev.flutter.flutter-gradle-plugin" 
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+android {
+    // CRITICAL FIX: Ensure compileSdkVersion is explicitly set from the Flutter properties
+    compileSdkVersion flutter.compileSdkVersion 
+    ndkVersion flutter.ndkVersion
+
+    namespace "com.example.flutterapplication1" 
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.example.flutterapplication1"
+        minSdkVersion flutter.minSdkVersion 
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig debugging.signingConfig
+        }
+    }
+}
+
+// The Flutter block is still needed here
+flutter {
+    source '../..'
+}
+
+// The dependencies block remains for library dependencies
+dependencies {
+    // We explicitly get the version from the root project as before
+    def kotlinVersion = rootProject.extra.get("kotlin_version") as String
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+}

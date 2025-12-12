@@ -1,0 +1,20 @@
+pluginManagement {
+    def flutterSdkPath = localProperties.getProperty('flutter.sdk')
+    if (flutterSdkPath != null) {
+        // Defines the local repository where the 'dev.flutter.flutter-gradle-plugin' lives.
+        includeBuild("$flutterSdkPath/.android/gradle")
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    // Apply the Flutter Gradle Plugin via its ID here for early configuration
+    id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
+}
+
+include ':app'
