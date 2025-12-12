@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Offline Music',
+      title: 'Offline Music Player',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
